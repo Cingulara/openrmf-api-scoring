@@ -1,0 +1,11 @@
+2019-01-21 18:50:32.9474 Info Message Template Auto Format enabled
+2019-01-21 18:50:32.9754 Info Loading assembly: NLog.Web.AspNetCore
+2019-01-21 18:50:33.0873 Info Adding target Console Target[Console]
+2019-01-21 18:50:33.1860 Error Parsing configuration from /Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/nlog.config failed. Exception: NLog.NLogConfigurationException: Exception when parsing /Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/nlog.config.  ---> NLog.NLogConfigurationException: Target allfile not found.
+   at NLog.Config.XmlLoggingConfiguration.ParseLoggerElement(NLogXmlElement loggerElement, IList`1 rulesCollection)
+   at NLog.Config.XmlLoggingConfiguration.ParseRulesElement(NLogXmlElement rulesElement, IList`1 rulesCollection)
+   at NLog.Config.XmlLoggingConfiguration.ParseNLogElement(NLogXmlElement nlogElement, String filePath, Boolean autoReloadDefault)
+   at NLog.Config.XmlLoggingConfiguration.Initialize(XmlReader reader, String fileName, Boolean ignoreErrors)
+   --- End of inner exception stack trace ---
+2019-01-21 18:50:33.1881 Warn Failed loading config from /Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/nlog.config. Invalid XML?
+2019-01-21 18:50:33.2003 Info Found 19 configuration items

@@ -1,0 +1,15 @@
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/nlog.config
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/openstig-scoring-api.deps.json
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/openstig-scoring-api.runtimeconfig.json
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/openstig-scoring-api.runtimeconfig.dev.json
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/openstig-scoring-api.dll
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/bin/Debug/netcoreapp2.2/openstig-scoring-api.pdb
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.csprojAssemblyReference.cache
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.csproj.CoreCompileInputs.cache
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.RazorAssemblyInfo.cache
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.RazorAssemblyInfo.cs
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.AssemblyInfoInputs.cache
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.AssemblyInfo.cs
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.RazorTargetAssemblyInfo.cache
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.dll
+/Users/dalebingham/opensource/openSTIG/openstig-api-scoring/obj/Debug/netcoreapp2.2/openstig-scoring-api.pdb
