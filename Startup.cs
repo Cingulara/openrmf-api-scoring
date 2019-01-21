@@ -36,7 +36,7 @@ namespace openstig_scoring_api
                     {
                         Name = "Dale Bingham",
                         Email = "dale.bingham@cingulara.com",
-                        Url = "https://github.com/Cingulara/openSTIGtool"
+                        Url = "https://github.com/Cingulara/openstig-api-scoring"
                     } });
             });
 
