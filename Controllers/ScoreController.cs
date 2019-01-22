@@ -25,16 +25,11 @@ namespace openstig_scoring_api.Controllers
     [Route("api/[controller]")]
     public class ScoreController : Controller
     {
-	    private readonly IDistributedCache  _cache;
- 
-		// _distributedCache.GetString(cacheKey);
-		// _distributedCache.SetString(cacheKey, existingTime);
-        private readonly ILogger<ScoreController> _logger;
+       private readonly ILogger<ScoreController> _logger;
         const string exampleSTIG = "/examples/asd-example.ckl";
 
-        public ScoreController(IDistributedCache cache, ILogger<ScoreController> logger)
+        public ScoreController(ILogger<ScoreController> logger)
         {
-            _cache = cache;
             _logger = logger;
         }
 

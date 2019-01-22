@@ -14,6 +14,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+using openstig_scoring_api.Models;
+
 namespace openstig_scoring_api
 {
     public class Startup
@@ -27,7 +29,8 @@ namespace openstig_scoring_api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {// Register the Swagger generator, defining one or more Swagger documents
+        {            
+            // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "openSTIG Scoring API", Version = "v1", 
