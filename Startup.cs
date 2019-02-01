@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 using openstig_scoring_api.Models;
+using openstig_scoring_api.Data;
 
 namespace openstig_scoring_api
 {
@@ -29,7 +30,16 @@ namespace openstig_scoring_api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
+            // Register the database components
+            services.Configure<Settings>(options =>
+            {
+                options.ConnectionString = Environment.GetEnvironmentVariable("mongoConnection");
+                options.Database = Environment.GetEnvironmentVariable("mongodb");
+            });
+            
+            services.AddTransient<IScoreRepository, ScoreRepository>();
+
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -58,10 +68,8 @@ namespace openstig_scoring_api
                         .AllowCredentials();
                     });
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            // add this in memory for now. Persist later.
-        	services.AddDistributedMemoryCache();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
