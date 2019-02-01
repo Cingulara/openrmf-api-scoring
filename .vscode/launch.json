@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openstig-scoring-api.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openstig-api-scoring.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
