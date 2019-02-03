@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openstig-scoring-api.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openstig-api-scoring.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -29,7 +29,11 @@
                 }
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://*:8180",
+                "mongoConnection": "mongodb://openstigscore:openstig1234!@localhost",
+                "mongodb": "openstigscore",
+                "natsserverurl": "nats://192.168.11.46:4222"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

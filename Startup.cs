@@ -14,6 +14,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+using openstig_scoring_api.Models;
+using openstig_scoring_api.Data;
+
 namespace openstig_scoring_api
 {
     public class Startup
@@ -27,7 +30,17 @@ namespace openstig_scoring_api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {// Register the Swagger generator, defining one or more Swagger documents
+        {
+            // Register the database components
+            services.Configure<Settings>(options =>
+            {
+                options.ConnectionString = Environment.GetEnvironmentVariable("mongoConnection");
+                options.Database = Environment.GetEnvironmentVariable("mongodb");
+            });
+            
+            services.AddTransient<IScoreRepository, ScoreRepository>();
+
+            // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "openSTIG Scoring API", Version = "v1", 
@@ -36,7 +49,7 @@ namespace openstig_scoring_api
                     {
                         Name = "Dale Bingham",
                         Email = "dale.bingham@cingulara.com",
-                        Url = "https://github.com/Cingulara/openSTIGtool"
+                        Url = "https://github.com/Cingulara/openstig-api-scoring"
                     } });
             });
 
@@ -55,10 +68,8 @@ namespace openstig_scoring_api
                         .AllowCredentials();
                     });
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            // add this in memory for now. Persist later.
-        	services.AddDistributedMemoryCache();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddXmlSerializerFormatters();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
