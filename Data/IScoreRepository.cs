@@ -9,6 +9,8 @@ namespace openstig_scoring_api.Data {
         Task<IEnumerable<Score>> GetAllScores();
         Task<Score> GetScore(string id);
 
+        Task<Score> GetScorebyArtifact(string artifactId);
+
         // query after multiple parameters
         Task<IEnumerable<Score>> GetScore(string bodyText, DateTime updatedFrom, long headerSizeLimit);
 
