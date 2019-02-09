@@ -64,6 +64,21 @@ namespace openstig_scoring_api.Controllers
                 return NotFound();
             }
         }
+        
+        // GET /artifact/value
+        [HttpGet("artifact/{id}")]
+        public async Task<IActionResult> GetScoreByArtifact(string id)
+        {
+            try {
+                Score score = new Score();
+                score = await _scoreRepo.GetScorebyArtifact(id);
+                return Ok(score);
+            }
+            catch (Exception ex) {
+                _logger.LogError(ex, "Error Retrieving Score for artifactId {0}", id);
+                return NotFound();
+            }
+        }
 
     }
 }

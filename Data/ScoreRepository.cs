@@ -31,7 +31,6 @@ namespace openstig_scoring_api.Data {
         }
 
         // query after Id or InternalId (BSonId value)
-        //
         public async Task<Score> GetScore(string id)
         {
             try
@@ -41,6 +40,21 @@ namespace openstig_scoring_api.Data {
                                 .Find(Score => Score.id == new Guid(id)).FirstOrDefaultAsync();
                                 //|| Score.InternalId == internalId).FirstOrDefaultAsync();
             }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
+
+        // query after artifactId
+        public async Task<Score> GetScorebyArtifact(string artifactId)
+        {
+            try
+            {
+                return await _context.Scores
+                    .Find(Score => Score.artifactId == new Guid(artifactId)).FirstOrDefaultAsync();
+             }
             catch (Exception ex)
             {
                 // log or manage the exception
