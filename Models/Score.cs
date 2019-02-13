@@ -6,7 +6,7 @@ namespace openstig_scoring_api.Models
 {
     /// <summary>
     /// This is the class that shows the score of the STIG for all categories
-    /// <summary>
+    /// </summary>
 
     public class Score
     {
