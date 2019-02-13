@@ -31,5 +31,9 @@
 *.out
 *.app
 
+# C# stuff
+obj
+bin
+
 # MAC OSX
 .DS_Store

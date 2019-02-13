@@ -5,7 +5,11 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <RootNamespace>openstig_scoring_api</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
-    <ProjectGuid>{05a94d30-9b4d-4bdc-b312-7f35957ea1a9}</ProjectGuid>
+    <ProjectGuid>{4ac57005-52ed-4a80-8f81-5e860441d9ce}</ProjectGuid>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <Version>0.1</Version>
+    <InformationalVersion>This is an alpha of the openSTIG Tool Scoring API from Cingulara</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +21,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="mongodb.driver" Version="2.7.2" />
     <PackageReference Include="NLog" Version="4.5.11" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.7.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="mongodb.driver" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>
