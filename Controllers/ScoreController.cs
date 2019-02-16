@@ -17,7 +17,6 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using openstig_scoring_api.Data;
 
@@ -80,5 +79,15 @@ namespace openstig_scoring_api.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult Score (string rawChecklist){
+            try {
+                return Ok(ScoringEngine.ScoreChecklistString(rawChecklist));
+            }
+            catch (Exception ex) {
+                _logger.LogError(ex, "Error creating Score for XML string passed in");
+                return BadRequest();
+            }
+        }
     }
 }
