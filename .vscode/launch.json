@@ -33,7 +33,7 @@
                 "ASPNETCORE_URLS": "http://*:8090",
                 "mongoConnection": "mongodb://openstigscore:openstig1234!@localhost/openstigscore?authSource=admin",
                 "mongodb": "openstigscore",
-                "natsserverurl": "nats://192.168.11.46:4222"
+                "natsserverurl": "nats://192.168.11.52:4222"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
