@@ -18,7 +18,7 @@ docker build --rm -t openstig-api-scoring:0.1 .
 * ~/mongodb/bin/mongo 'mongodb://root:myp2ssw0rd@localhost'
 * use admin
 * db.createUser({ user: "openstigscore" , pwd: "openstig1234!", roles: ["readWriteAnyDatabase"]});
-* use openstig
+* use openstigscore
 * db.createCollection("Scores");
 
 ## connecting to the database collection straight

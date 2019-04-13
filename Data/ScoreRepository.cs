@@ -36,9 +36,7 @@ namespace openstig_scoring_api.Data {
             try
             {
                 ObjectId internalId = GetInternalId(id);
-                return await _context.Scores
-                                .Find(Score => Score.id == new Guid(id)).FirstOrDefaultAsync();
-                                //|| Score.InternalId == internalId).FirstOrDefaultAsync();
+                return await _context.Scores.Find(Score => Score.InternalId == GetInternalId(id)).FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -52,8 +50,7 @@ namespace openstig_scoring_api.Data {
         {
             try
             {
-                return await _context.Scores
-                    .Find(Score => Score.artifactId == new Guid(artifactId)).FirstOrDefaultAsync();
+                return await _context.Scores.Find(Score => Score.artifactId == GetInternalId(artifactId)).FirstOrDefaultAsync();
              }
             catch (Exception ex)
             {
