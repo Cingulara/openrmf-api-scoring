@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openstig-api-scoring.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/openrmf-api-scoring.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -31,8 +31,8 @@
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "ASPNETCORE_URLS": "http://*:8090",
-                "mongoConnection": "mongodb://openstigscore:openstig1234!@localhost/openstigscore?authSource=admin",
-                "mongodb": "openstigscore",
+                "mongoConnection": "mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin",
+                "mongodb": "openrmfscore",
                 "natsserverurl": "nats://192.168.11.52:4222"
             },
             "sourceFileMap": {
