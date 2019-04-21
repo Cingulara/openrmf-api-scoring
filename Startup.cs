@@ -14,10 +14,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-using openstig_scoring_api.Models;
-using openstig_scoring_api.Data;
+using openrmf_scoring_api.Models;
+using openrmf_scoring_api.Data;
 
-namespace openstig_scoring_api
+namespace openrmf_scoring_api
 {
     public class Startup
     {

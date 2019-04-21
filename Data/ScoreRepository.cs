@@ -1,4 +1,4 @@
-using openstig_scoring_api.Models;
+using openrmf_scoring_api.Models;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using Microsoft.Extensions.Options;
 
-namespace openstig_scoring_api.Data {
+namespace openrmf_scoring_api.Data {
     public class ScoreRepository : IScoreRepository
     {
         private readonly ScoreContext _context = null;

@@ -1,8 +1,8 @@
 using MongoDB.Driver;
-using openstig_scoring_api.Models;
+using openrmf_scoring_api.Models;
 using Microsoft.Extensions.Options;
 
-namespace openstig_scoring_api.Data
+namespace openrmf_scoring_api.Data
 {
     public class ScoreContext
     {

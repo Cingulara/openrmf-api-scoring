@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace openstig_scoring_api.Models
+namespace openrmf_scoring_api.Models
 {
 
     public class STIG_INFO {

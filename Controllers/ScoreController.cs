@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using openstig_scoring_api.Classes;
-using openstig_scoring_api.Models;
+using openrmf_scoring_api.Classes;
+using openrmf_scoring_api.Models;
 using System.IO;
 using System.Text;
 using Microsoft.AspNetCore;
@@ -18,9 +18,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using openstig_scoring_api.Data;
+using openrmf_scoring_api.Data;
 
-namespace openstig_scoring_api.Controllers
+namespace openrmf_scoring_api.Controllers
 {
     [Route("/")]
     public class ScoreController : Controller

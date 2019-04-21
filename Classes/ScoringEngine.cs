@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using openstig_scoring_api.Models;
+using openrmf_scoring_api.Models;
 using System.Linq;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 
-namespace openstig_scoring_api.Classes
+namespace openrmf_scoring_api.Classes
 {
     public static class ScoringEngine 
     {

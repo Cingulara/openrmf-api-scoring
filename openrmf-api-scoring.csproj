@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>openstig_scoring_api</RootNamespace>
+    <RootNamespace>openrmf_scoring_api</RootNamespace>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <ProjectGuid>{4ac57005-52ed-4a80-8f81-5e860441d9ce}</ProjectGuid>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
-    <Version>0.6</Version>
-    <InformationalVersion>This is a beta of the openSTIG Tool Scoring API from Cingulara</InformationalVersion>
+    <Version>0.7</Version>
+    <InformationalVersion>This is a beta of the openRMF Tool Scoring API from Cingulara</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
