@@ -56,10 +56,30 @@ namespace openrmf_scoring_api.Classes
                 score.totalCat3NotAFinding = xml.STIGS.iSTIG.VULN.Where(x => x.STATUS.ToLower() == "notafinding" && 
                         x.STIG_DATA.Where(y => y.VULN_ATTRIBUTE == "Severity" && 
                                                y.ATTRIBUTE_DATA == "low").FirstOrDefault() != null).Count();
+
+                // get the title and release which is a list of children of child nodes buried deeper :face-palm-emoji:
+                score.stigRelease = xml.STIGS.iSTIG.STIG_INFO.SI_DATA.Where(x => x.SID_NAME.ToLower() == "releaseinfo").FirstOrDefault().SID_DATA;
+                score.stigType = xml.STIGS.iSTIG.STIG_INFO.SI_DATA.Where(x => x.SID_NAME.ToLower() == "title").FirstOrDefault().SID_DATA;
+
+                // shorten the names a bit
+                if (score != null && !string.IsNullOrEmpty(score.stigType)){
+                    score.stigType = score.stigType.Replace("Security Technical Implementation Guide", "STIG");
+                    score.stigType = score.stigType.Replace("Windows", "WIN");
+                    score.stigType = score.stigType.Replace("Application Security and Development", "ASD");
+                    score.stigType = score.stigType.Replace("Microsoft Internet Explorer", "MSIE");
+                    score.stigType = score.stigType.Replace("Red Hat Enterprise Linux", "REL");
+                    score.stigType = score.stigType.Replace("MS SQL Server", "MSSQL");
+                    score.stigType = score.stigType.Replace("Server", "SVR");
+                    score.stigType = score.stigType.Replace("Workstation", "WRK");
+                }
+                if (score != null && !string.IsNullOrEmpty(score.stigRelease)) {
+                    score.stigRelease = score.stigRelease.Replace("Release: ", "R"); // i.e. R11, R2 for the release number
+                    score.stigRelease = score.stigRelease.Replace("Benchmark Date:","dated");
+                }
                 return score;
             }
             catch (Exception ex) {
-                Console.WriteLine("oops! " + ex.Message);
+                Console.WriteLine("Oops! The Scoring Engine had a major problem..." + ex.Message);
                 return new Score();
             }
         }
