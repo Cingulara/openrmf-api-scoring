@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace tests.Controllers
 {
-
     public class ScoreControllerTests
     {
         private readonly Mock<ILogger<ScoreController>> _mockLogger;
