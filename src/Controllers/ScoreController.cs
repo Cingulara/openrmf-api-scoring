@@ -6,17 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using openrmf_scoring_api.Classes;
 using openrmf_scoring_api.Models;
-using System.IO;
-using System.Text;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using System.Xml.Serialization;
-using System.Xml;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Newtonsoft.Json;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using openrmf_scoring_api.Data;
 
@@ -36,6 +26,7 @@ namespace openrmf_scoring_api.Controllers
 
         // GET the listing with Ids of all the scores for the checklists
         [HttpGet]
+        [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> ListScores()
         {
             try {
@@ -51,6 +42,7 @@ namespace openrmf_scoring_api.Controllers
 
         // GET /value
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> GetScore(string id)
         {
             try {
@@ -66,6 +58,7 @@ namespace openrmf_scoring_api.Controllers
         
         // GET /artifact/value
         [HttpGet("artifact/{id}")]
+        [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> GetScoreByArtifact(string id)
         {
             try {
@@ -80,6 +73,7 @@ namespace openrmf_scoring_api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public IActionResult Score (string rawChecklist){
             try {
                 return Ok(ScoringEngine.ScoreChecklistString(rawChecklist));
