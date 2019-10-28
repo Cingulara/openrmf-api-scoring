@@ -33,7 +33,7 @@
                 "ASPNETCORE_URLS": "http://*:8090",
                 "MONGODBCONNECTION": "mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin",
                 "MONGODB": "openrmfscore",
-                "JWT-AUTHORITY" : "http://192.168.11.39:9001/auth/realms/openrmf",
+                "JWT-AUTHORITY" : "http://192.168.11.29:9001/auth/realms/openrmf",
                 "JWT-CLIENT": "openrmf"
             },
             "sourceFileMap": {
