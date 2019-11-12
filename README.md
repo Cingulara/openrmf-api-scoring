@@ -1,6 +1,6 @@
-# openstig-api-scoring
-This is the openSTIG Scoring API for scoring a checklist. This piece of the openSTIG tool allows reading of the scoring database that is updated with
-eventual consistency using the openstig-msg-score project that reads newer/updated XML and scores by category and status for each vulnerability in the 
+# OpenRMF-api-scoring
+This is the OpenRMF Scoring API for scoring a checklist. This piece of the OpenRMF tool allows reading of the scoring database that is updated with
+eventual consistency using the openrmf-msg-score project that reads newer/updated XML and scores by category and status for each vulnerability in the 
 appropriate STIG being saved. See the Documentation in https://github.com/Cingulara/openstig-docs for more information.
 
 
@@ -12,17 +12,17 @@ appropriate STIG being saved. See the Documentation in https://github.com/Cingul
 /swagger/ gives you the API structure.
 
 ## Making your local Docker image
-docker build --rm -t openstig-api-scoring:0.1 .
+docker build --rm -t openrmf-api-scoring:0.1 .
 
 ## creating the user
 * ~/mongodb/bin/mongo 'mongodb://root:myp2ssw0rd@localhost'
 * use admin
-* db.createUser({ user: "openstigscore" , pwd: "openstig1234!", roles: ["readWriteAnyDatabase"]});
+* db.createUser({ user: "openrmfscore" , pwd: "openrmf1234!", roles: ["readWriteAnyDatabase"]});
 * use openstigscore
 * db.createCollection("Scores");
 
 ## connecting to the database collection straight
-~/mongodb/bin/mongo 'mongodb://openstigscore:openstig1234!@localhost/openstigscore?authSource=admin'
+~/mongodb/bin/mongo 'mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin'
 
 ## Messaging Platform
 Using NATS from Synadia to have a messaging backbone and eventual consistency. Currently publishing to these known items:
