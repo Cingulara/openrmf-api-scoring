@@ -59,6 +59,21 @@ namespace openrmf_scoring_api.Data {
             }
         }
 
+        // get all scores by system name
+        public async Task<IEnumerable<Score>> GetScoresbySystem(string systemName)
+        {
+            try
+            {
+                var query = _context.Scores.Find(Score => Score.system == systemName);
+                return await query.ToListAsync();
+             }
+            catch (Exception ex)
+            {
+                // log or manage the exception
+                throw ex;
+            }
+        }
+
         // query after body text, updated time, and header image size
         //
         public async Task<IEnumerable<Score>> GetScore(string bodyText, DateTime updatedFrom, long headerSizeLimit)
