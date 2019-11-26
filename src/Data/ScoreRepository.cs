@@ -60,11 +60,11 @@ namespace openrmf_scoring_api.Data {
         }
 
         // get all scores by system name
-        public async Task<IEnumerable<Score>> GetScoresbySystem(string systemName)
+        public async Task<IEnumerable<Score>> GetScoresbySystem(string systemGroupId)
         {
             try
             {
-                var query = _context.Scores.Find(Score => Score.system == systemName);
+                var query = _context.Scores.Find(Score => Score.systemGroupId == systemGroupId);
                 return await query.ToListAsync();
              }
             catch (Exception ex)

@@ -13,7 +13,7 @@ namespace openrmf_scoring_api.Data {
         Task<Score> GetScorebyArtifact(string artifactId);
 
         // get the score by the system as a whole
-        Task<IEnumerable<Score>> GetScoresbySystem(string systemName);  
+        Task<IEnumerable<Score>> GetScoresbySystem(string systemGroupId);  
 
         // query after multiple parameters
         Task<IEnumerable<Score>> GetScore(string bodyText, DateTime updatedFrom, long headerSizeLimit);

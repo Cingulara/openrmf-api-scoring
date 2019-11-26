@@ -74,16 +74,16 @@ namespace openrmf_scoring_api.Controllers
 
         // GET scores by the system name as a whole
         // create one return record for all the checklists in there
-        [HttpGet("system/{systemName}")]
+        [HttpGet("system/{systemGroupId}")]
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
-        public async Task<IActionResult> GetScoreBySystem(string systemName)
+        public async Task<IActionResult> GetScoreBySystem(string systemGroupId)
         {
             try {
                 IEnumerable<Score> scores;
-                scores = await _scoreRepo.GetScoresbySystem(systemName);
+                scores = await _scoreRepo.GetScoresbySystem(systemGroupId);
                 // cycle through the list and return back only a single score
                 Score totalScore = new Score();
-                totalScore.system = systemName;
+                totalScore.systemGroupId = systemGroupId;
                 totalScore.stigType = "all";
                 totalScore.stigRelease = "all";
                 totalScore.hostName = "all";
@@ -107,7 +107,7 @@ namespace openrmf_scoring_api.Controllers
                 return Ok(totalScore);
             }
             catch (Exception ex) {
-                _logger.LogError(ex, "Error Retrieving Scores for system {0}", systemName);
+                _logger.LogError(ex, "Error Retrieving Scores for system {0}", systemGroupId);
                 return NotFound();
             }
         }
