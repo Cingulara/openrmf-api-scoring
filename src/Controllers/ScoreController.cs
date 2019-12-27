@@ -39,15 +39,18 @@ namespace openrmf_scoring_api.Controllers
         public async Task<IActionResult> GetScore(string id)
         {
             try {
+                _logger.LogInformation("Calling GetScore({0})", id);
                 Score score = new Score();
                 score = await _scoreRepo.GetScore(id);
-                if (score == null) {
+                if (score == null) {                    
+                    _logger.LogWarning("Calling GetScore({0}) returned an invalid Scoring record", id);
                     return NotFound();
                 }
+                _logger.LogInformation("Called GetScore({0}) successfully", id);
                 return Ok(score);
             }
             catch (Exception ex) {
-                _logger.LogError(ex, "Error Retrieving Score for id {0}", id);
+                _logger.LogError(ex, "GetScore() Error Retrieving Score for id {0}", id);
                 return BadRequest();
             }
         }
@@ -67,15 +70,18 @@ namespace openrmf_scoring_api.Controllers
         public async Task<IActionResult> GetScoreByArtifact(string id)
         {
             try {
+                _logger.LogInformation("Calling GetScoreByArtifact({0})", id);
                 Score score = new Score();
                 score = await _scoreRepo.GetScorebyArtifact(id);
-                if (score == null) {
+                if (score == null) {    
+                    _logger.LogWarning("Calling GetScoreByArtifact({0}) returned an invalid Scoring record", id);
                     return NotFound();
                 }
+                _logger.LogInformation("Called GetScoreByArtifact({0}) successfully", id);
                 return Ok(score);
             }
             catch (Exception ex) {
-                _logger.LogError(ex, "Error Retrieving Score for artifactId {0}", id);
+                _logger.LogError(ex, "GetScoreByArtifact() Error Retrieving Score for artifactId {0}", id);
                 return BadRequest();
             }
         }
@@ -95,9 +101,11 @@ namespace openrmf_scoring_api.Controllers
         public async Task<IActionResult> GetScoreBySystem(string systemGroupId)
         {
             try {
+                _logger.LogInformation("Calling GetScoreBySystem({0})", systemGroupId);
                 IEnumerable<Score> scores;
                 scores = await _scoreRepo.GetScoresbySystem(systemGroupId);
                 if (scores == null) {
+                    _logger.LogWarning("Called GetScoreBySystem({0}) but it returned 0 scoring records", systemGroupId);
                     return NotFound();
                 }
                 // cycle through the list and return back only a single score
@@ -123,10 +131,11 @@ namespace openrmf_scoring_api.Controllers
                     totalScore.totalCat3NotReviewed += s.totalCat3NotReviewed;
                 }
                 // send back the summary scores of everything in the system
+                _logger.LogInformation("Called GetScoreBySystem({0}) successfully", systemGroupId);
                 return Ok(totalScore);
             }
             catch (Exception ex) {
-                _logger.LogError(ex, "Error Retrieving Scores for system {0}", systemGroupId);
+                _logger.LogError(ex, "GetScoreBySystem() Error Retrieving Scores for system {0}", systemGroupId);
                 return BadRequest();
             }
         }
@@ -146,10 +155,11 @@ namespace openrmf_scoring_api.Controllers
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public IActionResult Score (string rawChecklist){
             try {
+                _logger.LogInformation("Calling Score() with a raw Checklist XML data");
                 return Ok(ScoringEngine.ScoreChecklistString(rawChecklist));
             }
             catch (Exception ex) {
-                _logger.LogError(ex, "Error creating Score for XML string passed in");
+                _logger.LogError(ex, "Score() Error creating Score for XML string passed in");
                 return BadRequest();
             }
         }
