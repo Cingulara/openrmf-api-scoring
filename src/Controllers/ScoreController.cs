@@ -24,23 +24,16 @@ namespace openrmf_scoring_api.Controllers
             _scoreRepo = scoreRepo;
         }
 
-        // GET the listing with Ids of all the scores for the checklists
-        [HttpGet]
-        [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
-        public async Task<IActionResult> ListScores()
-        {
-            try {
-                IEnumerable<Score> scores;
-                scores = await _scoreRepo.GetAllScores();
-                return Ok(scores);
-            }
-            catch (Exception ex) {
-                _logger.LogError(ex, "Error listing all scores. Check the database!");
-                return BadRequest();
-            }
-        }
-
-        // GET /value
+        /// <summary>
+        /// GET score by the checklist/artifact Id (Old call)
+        /// </summary>
+        /// <param name="id">The system ID for the checklists</param>
+        /// <returns>
+        /// HTTP Status showing it was generated and the score record showing the categories and status numbers.
+        /// </returns>
+        /// <response code="200">Returns the score generated for the checklist data passed in</response>
+        /// <response code="400">If the item did not generate correctly, or if the CKL data was invalid</response>
+        /// <response code="404">If the artifact ID was invalid</response>
         [HttpGet("{id}")]
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> GetScore(string id)
@@ -48,15 +41,27 @@ namespace openrmf_scoring_api.Controllers
             try {
                 Score score = new Score();
                 score = await _scoreRepo.GetScore(id);
+                if (score == null) {
+                    return NotFound();
+                }
                 return Ok(score);
             }
             catch (Exception ex) {
                 _logger.LogError(ex, "Error Retrieving Score for id {0}", id);
-                return NotFound();
+                return BadRequest();
             }
         }
-        
-        // GET /artifact/value
+
+        /// <summary>
+        /// GET score by the checklist/artifact Id
+        /// </summary>
+        /// <param name="id">The system ID for the checklists</param>
+        /// <returns>
+        /// HTTP Status showing it was generated and the score record showing the categories and status numbers.
+        /// </returns>
+        /// <response code="200">Returns the score generated for the checklist data passed in</response>
+        /// <response code="400">If the item did not generate correctly, or if the CKL data was invalid</response>
+        /// <response code="404">If the artifact ID was invalid</response>
         [HttpGet("artifact/{id}")]
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> GetScoreByArtifact(string id)
@@ -64,16 +69,27 @@ namespace openrmf_scoring_api.Controllers
             try {
                 Score score = new Score();
                 score = await _scoreRepo.GetScorebyArtifact(id);
+                if (score == null) {
+                    return NotFound();
+                }
                 return Ok(score);
             }
             catch (Exception ex) {
                 _logger.LogError(ex, "Error Retrieving Score for artifactId {0}", id);
-                return NotFound();
+                return BadRequest();
             }
         }
 
-        // GET scores by the system name as a whole
-        // create one return record for all the checklists in there
+        /// <summary>
+        /// GET scores by the system name as a whole. Create a single Score record for all checklists.
+        /// </summary>
+        /// <param name="systemGroupId">The system ID for the checklists</param>
+        /// <returns>
+        /// HTTP Status showing it was generated and the score record showing the categories and status numbers.
+        /// </returns>
+        /// <response code="200">Returns the score generated for the checklist data passed in</response>
+        /// <response code="400">If the item did not generate correctly, or if the CKL data was invalid</response>
+        /// <response code="404">If the system ID was invalid</response>
         [HttpGet("system/{systemGroupId}")]
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public async Task<IActionResult> GetScoreBySystem(string systemGroupId)
@@ -81,6 +97,9 @@ namespace openrmf_scoring_api.Controllers
             try {
                 IEnumerable<Score> scores;
                 scores = await _scoreRepo.GetScoresbySystem(systemGroupId);
+                if (scores == null) {
+                    return NotFound();
+                }
                 // cycle through the list and return back only a single score
                 Score totalScore = new Score();
                 totalScore.systemGroupId = systemGroupId;
@@ -108,10 +127,21 @@ namespace openrmf_scoring_api.Controllers
             }
             catch (Exception ex) {
                 _logger.LogError(ex, "Error Retrieving Scores for system {0}", systemGroupId);
-                return NotFound();
+                return BadRequest();
             }
         }
 
+        /// <summary>
+        /// POST Called from the OpenRMF UI (or external access) to generate the score of a checklist for the 
+        /// category 1, 2, 3 items based on status. This is called from the Template page OR called from any 
+        /// checklist listing where the score is currently empty for some reason.
+        /// </summary>
+        /// <param name="rawChecklist">The actual CKL file text to parse</param>
+        /// <returns>
+        /// HTTP Status showing it was generated and the score record showing the categories and status numbers.
+        /// </returns>
+        /// <response code="200">Returns the score generated for the checklist data passed in</response>
+        /// <response code="400">If the item did not generate correctly, or if the CKL data was invalid</response>
         [HttpPost]
         [Authorize(Roles = "Administrator,Reader,Editor,Assessor")]
         public IActionResult Score (string rawChecklist){
