@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Prometheus;
 
 using openrmf_scoring_api.Models;
 using openrmf_scoring_api.Data;
@@ -113,6 +114,20 @@ namespace openrmf_scoring_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Custom Metrics to count requests for each endpoint and the method
+            var counter = Metrics.CreateCounter("openrmf_score_api_path_counter", "Counts requests to OpenRMF endpoints", new CounterConfiguration
+            {
+                LabelNames = new[] { "method", "endpoint" }
+            });
+            app.Use((context, next) =>
+            {
+                counter.WithLabels(context.Request.Method, context.Request.Path).Inc();
+                return next();
+            });
+            // Use the Prometheus middleware
+            app.UseMetricServer();
+            app.UseHttpMetrics();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
