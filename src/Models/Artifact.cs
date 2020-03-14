@@ -25,7 +25,7 @@ namespace openrmf_scoring_api.Models
         public string stigRelease { get; set; }
         public string version {get; set;}
         public string title { get {
-            return hostName.Trim() + "-" + stigType.Trim() + "-" + stigRelease.Trim();
+            return hostName.Trim() + "-" + stigType.Trim() + "-V" + version + "-" + stigRelease.Trim();
         }}
         public CHECKLIST CHECKLIST { get; set; }
         
