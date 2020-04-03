@@ -1,3 +1,5 @@
+![.NET Core Build and Test](https://github.com/Cingulara/openrmf-api-scoring/workflows/.NET%20Core%20Build%20and%20Test/badge.svg)
+
 # OpenRMF-api-scoring
 This is the OpenRMF Scoring API for scoring a checklist. This piece of the OpenRMF tool allows reading of the scoring database that is updated with
 eventual consistency using the openrmf-msg-score project that reads newer/updated XML and scores by category and status for each vulnerability in the 
@@ -12,7 +14,7 @@ appropriate STIG being saved. See the Documentation in https://github.com/Cingul
 /swagger/ gives you the API structure.
 
 ## Making your local Docker image
-docker build --rm -t openrmf-api-scoring:0.1 .
+docker build --rm -t openrmf-api-scoring:0.13 .
 
 ## creating the user
 * ~/mongodb/bin/mongo 'mongodb://root:myp2ssw0rd@localhost'

@@ -17,9 +17,9 @@ namespace tests.Models
         public void Test_ScoreWithDataIsValid()
         {
             Score score = new Score();
-            score.system = "my system";
+            score.systemGroupId = "7657856hjgkjhfcjghfyretc";
             score.hostName = "my host name";
-            score.stigRelease = "V1";
+            score.stigRelease = "R10";
             score.stigType = "Google Chrome";
             score.created = DateTime.Now;
             score.updatedOn = DateTime.Now;
@@ -28,7 +28,7 @@ namespace tests.Models
             // test things out
             Assert.True(score != null);
             Assert.True (!string.IsNullOrEmpty(score.created.ToShortDateString()));
-            Assert.True (!string.IsNullOrEmpty(score.system));
+            Assert.True (!string.IsNullOrEmpty(score.systemGroupId));
             Assert.True (!string.IsNullOrEmpty(score.hostName));
             Assert.True (!string.IsNullOrEmpty(score.stigType));
             Assert.True (!string.IsNullOrEmpty(score.stigRelease));
@@ -59,7 +59,7 @@ namespace tests.Models
         public void Test_ScoreWithCalculatedTotalsIsValid()
         {
             Score score = new Score();
-            score.system = "my system";
+            score.systemGroupId = "my system";
             score.hostName = "my host name";
             score.stigRelease = "V1";
             score.stigType = "Google Chrome";
