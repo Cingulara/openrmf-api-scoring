@@ -16,6 +16,11 @@ namespace openrmf_scoring_api.Classes
         {
             try {
                 Score score = new Score();
+                if (!string.IsNullOrEmpty(xml.ASSET.HOST_NAME)) 
+                    score.hostName = xml.ASSET.HOST_NAME;
+                else if (!string.IsNullOrEmpty(xml.ASSET.HOST_FQDN)) 
+                    score.hostName = xml.ASSET.HOST_FQDN;
+
                 // CAT 1
                 score.totalCat1NotReviewed = xml.STIGS.iSTIG.VULN.Where(x => x.STATUS.ToLower() == "not_reviewed" && 
                         x.STIG_DATA.Where(y => y.VULN_ATTRIBUTE == "Severity" && 
