@@ -7,11 +7,11 @@ appropriate STIG being saved. See the Documentation in https://github.com/Cingul
 
 
 ## API Calls
-/api/score/{id} to pass in a GUID and score it, if in the database/memory
-
-/api/score/ gives you the example full ASD checklist and scores a default empty checklist
-
-/swagger/ gives you the API structure.
+* /{id} - pass in an internal ID and score it, if in the database
+* /artifact/{id} - pass in a GUID and score it, if in the database
+* /system/{id} - pass in to get the score across all checklists in a given system
+*/ - POST the raw XML string to get back a score on that data dynamically
+* /swagger/ gives you the API structure.
 
 ## Making your local Docker image
 docker build --rm -t openrmf-api-scoring:0.13 .
@@ -22,12 +22,16 @@ docker build --rm -t openrmf-api-scoring:0.13 .
 * db.createUser({ user: "openrmfscore" , pwd: "openrmf1234!", roles: ["readWriteAnyDatabase"]});
 * use openstigscore
 * db.createCollection("Scores");
+* db.Scores.createIndex({ artifactId: 1 })
+* db.Scores.createIndex({ systemGroupId: 1 })
+* db.Scores.createIndex({ hostName: 1 })
+* db.Scores.createIndex({ stigType: 1 })
 
 ## connecting to the database collection straight
 ~/mongodb/bin/mongo 'mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin'
 
 ## Messaging Platform
-Using NATS from Synadia to have a messaging backbone and eventual consistency. Currently publishing to these known items:
+Using NATS from Synadia to have a messaging backbone and eventual consistency. This Score API reads data from the Score database filled by listening to messages.  Currently publishing to these known items:
 * openstig.save.new with payload (new Guid Id)
 * openstig.save.update with payload (new Guid Id)
 * openstig.upload.new with payload (new Guid Id)
