@@ -10,7 +10,7 @@ appropriate STIG being saved. See the Documentation in https://github.com/Cingul
 * /{id} - pass in an internal ID and score it, if in the database
 * /artifact/{id} - pass in a GUID and score it, if in the database
 * /system/{id} - pass in to get the score across all checklists in a given system
-*/ - POST the raw XML string to get back a score on that data dynamically
+* / - POST the raw XML string to get back a score on that data dynamically
 * /swagger/ gives you the API structure.
 
 ## Making your local Docker image
