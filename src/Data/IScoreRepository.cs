@@ -18,5 +18,6 @@ namespace openrmf_scoring_api.Data {
         // query after multiple parameters
         Task<IEnumerable<Score>> GetScore(string bodyText, DateTime updatedFrom, long headerSizeLimit);
 
+        bool HealthStatus();
     }
 }
