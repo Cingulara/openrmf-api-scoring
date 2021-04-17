@@ -42,21 +42,25 @@ namespace openrmf_scoring_api
                     options.ConnectionString = Environment.GetEnvironmentVariable("DBCONNECTION");
                     options.Database = Environment.GetEnvironmentVariable("DB");
                 });
-            }            
+            }
             
-            // Use "OpenTracing.Contrib.NetCore" to automatically generate spans for ASP.NET Core
-            services.AddSingleton<ITracer>(serviceProvider =>  
-            {                
-                var loggerFactory = new LoggerFactory();
-                // use the environment variables to setup the Jaeger endpoints
-                var config = Jaeger.Configuration.FromEnv(loggerFactory);
-                var tracer = config.GetTracer();
+            if (Environment.GetEnvironmentVariable("JAEGER_AGENT_HOST") != null && 
+                !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JAEGER_AGENT_HOST"))) {
             
-                GlobalTracer.Register(tracer);  
-            
-                return tracer;  
-            });
-            services.AddOpenTracing();
+                // Use "OpenTracing.Contrib.NetCore" to automatically generate spans for ASP.NET Core
+                services.AddSingleton<ITracer>(serviceProvider =>  
+                {                
+                    var loggerFactory = new LoggerFactory();
+                    // use the environment variables to setup the Jaeger endpoints
+                    var config = Jaeger.Configuration.FromEnv(loggerFactory);
+                    var tracer = config.GetTracer();
+                
+                    GlobalTracer.Register(tracer);  
+                
+                    return tracer;  
+                });
+                services.AddOpenTracing();
+            }
             
             // added the database repo
             services.AddTransient<IScoreRepository, ScoreRepository>();
