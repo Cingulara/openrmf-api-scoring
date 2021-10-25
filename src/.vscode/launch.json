@@ -34,8 +34,8 @@
                 "DBCONNECTION": "mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin",
                 "DB": "openrmfscore",
                 "DBTYPE": "mongo",
-                "JWT-AUTHORITY" : "http://localhost:9001/auth/realms/openrmf",
-                "JWT-CLIENT": "openrmf"
+                "JWTAUTHORITY" : "http://localhost:9001/auth/realms/openrmf",
+                "JWTCLIENT": "openrmf"
                 // "JAEGER_AGENT_HOST": "localhost",
                 // "JAEGER_AGENT_PORT": "6831",
                 // "JAEGER_SERVICE_NAME": "openrmf-api-scoring",
