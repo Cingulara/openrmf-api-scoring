@@ -1,4 +1,4 @@
-VERSION ?= 1.08.00
+VERSION ?= 1.08.02
 NAME ?= "openrmf-api-scoring"
 AUTHOR ?= "Dale Bingham"
 PORT_EXT ?= 8082
