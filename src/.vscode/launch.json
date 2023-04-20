@@ -34,7 +34,7 @@
                 "DBCONNECTION": "mongodb://openrmfscore:openrmf1234!@localhost/openrmfscore?authSource=admin",
                 "DB": "openrmfscore",
                 "DBTYPE": "mongo",
-                "JWTAUTHORITY" : "http://localhost:9001/auth/realms/openrmf",
+                "JWTAUTHORITY" : "http://localhost:8080/auth/realms/openrmf",
                 "JWTCLIENT": "openrmf"
             },
             "sourceFileMap": {
