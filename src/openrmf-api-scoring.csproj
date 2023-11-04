@@ -7,7 +7,7 @@
     <ProjectGuid>{4ac57005-52ed-4a80-8f81-5e860441d9ce}</ProjectGuid>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
-    <Version>1.09.01</Version>
+    <Version>1.09.02</Version>
     <InformationalVersion>This is the OpenRMF Tool Scoring API from Cingulara</InformationalVersion>
   </PropertyGroup>
 
