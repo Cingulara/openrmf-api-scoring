@@ -28,10 +28,13 @@ namespace openrmf_scoring_api.Models
         public string stigType { get; set; }
         public string stigRelease { get; set; }
         public string title { get {
-            string _title = string.Empty;
-            _title = !string.IsNullOrEmpty(hostName) ? hostName.Trim() : "Unknown-Host";
-            _title += "-" + stigType.Trim() + "-" + stigRelease.Trim();
-            return _title;
+            string validHostname = !string.IsNullOrEmpty(hostName)? hostName.Trim() : "Unknown";
+            string validStigType = "";
+            if (!string.IsNullOrWhiteSpace(stigType)) validStigType = stigType.Trim();
+            string validStigRelease = "";
+            if (!string.IsNullOrWhiteSpace(stigRelease)) validStigRelease = stigRelease.Trim();
+
+            return validHostname + "-" + validStigType + "-" + validStigRelease;
         }}
         
         [BsonDateTimeOptions]
