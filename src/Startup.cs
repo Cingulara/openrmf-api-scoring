@@ -70,9 +70,9 @@ namespace openrmf_scoring_api
 
             foreach(string jwtServer in Environment.GetEnvironmentVariable("JWTAUTHORITY").Split(',')) {
                 if (jwtServer.EndsWith('/'))
-                    jwtAuthorities.Add((jwtServer + "realms/openrmf").Trim().ToLower());
+                    jwtAuthorities.Add((jwtServer).Trim().ToLower());
                 else 
-                    jwtAuthorities.Add((jwtServer + "/realms/openrmf").Trim().ToLower());
+                    jwtAuthorities.Add((jwtServer + "/").Trim().ToLower());
             }
 
             if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("JWTINTERNALAUTHORITY"))) {

@@ -35,7 +35,7 @@
                 "DB": "openrmfscore",
                 "DBTYPE": "mongo",
                 "JWTAUTHORITY" : "http://localhost:8080/auth/realms/openrmf",
-                "JWTINTERNALAUTHORITY" : "http://localhost:8080/auth/",
+                "JWTINTERNALAUTHORITY" : "http://localhost:8080/auth/realms/openrmf",
                 "JWTCLIENT": "openrmf"
             },
             "sourceFileMap": {
