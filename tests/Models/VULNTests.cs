@@ -1,37 +1,38 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class VULNTests
     {
         [Fact]
-        public void Test_NewVULNIsValid()
+        public void Constructor_InitializesStigDataList()
         {
-            VULN v = new VULN();
-            Assert.True(v != null);
-        }
-    
-        [Fact]
-        public void Test_VULNWithDataIsValid()
-        {
-            VULN v = new VULN();
-            v.STATUS = "my status";
-            v.FINDING_DETAILS = "my status";
-            v.COMMENTS = "my status";
-            v.SEVERITY_OVERRIDE = "my status";
-            v.SEVERITY_JUSTIFICATION = "my status";
+            var vuln = new VULN();
 
-            // test things out
-            Assert.True(v != null);
-            Assert.True(v.STIG_DATA != null);
-            Assert.True(v.STIG_DATA.Count == 0);
-            Assert.True(!string.IsNullOrEmpty(v.STATUS));
-            Assert.True(!string.IsNullOrEmpty(v.FINDING_DETAILS));
-            Assert.True(!string.IsNullOrEmpty(v.COMMENTS));
-            Assert.True(!string.IsNullOrEmpty(v.SEVERITY_OVERRIDE));
-            Assert.True(!string.IsNullOrEmpty(v.SEVERITY_JUSTIFICATION));
+            Assert.NotNull(vuln);
+            Assert.NotNull(vuln.STIG_DATA);
+            Assert.Empty(vuln.STIG_DATA);
+        }
+
+        [Fact]
+        public void Properties_RoundTripValues()
+        {
+            var vuln = new VULN
+            {
+                STATUS = "open",
+                FINDING_DETAILS = "details",
+                COMMENTS = "comment",
+                SEVERITY_OVERRIDE = "high",
+                SEVERITY_JUSTIFICATION = "approved"
+            };
+
+            vuln.STIG_DATA.Add(new STIG_DATA { VULN_ATTRIBUTE = "Severity", ATTRIBUTE_DATA = "medium" });
+
+            Assert.Equal("open", vuln.STATUS);
+            Assert.Equal("details", vuln.FINDING_DETAILS);
+            Assert.Single(vuln.STIG_DATA);
+            Assert.NotEqual("closed", vuln.STATUS);
         }
     }
 }

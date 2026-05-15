@@ -1,27 +1,29 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class STIG_INFOTests
     {
         [Fact]
-        public void Test_NewSTIG_INFOIsValid()
+        public void Constructor_InitializesSIDataList()
         {
-            STIG_INFO data = new STIG_INFO();
-            Assert.True(data != null);
-        }
-    
-        [Fact]
-        public void Test_STIG_INFOWithDataIsValid()
-        {
-            STIG_INFO data = new STIG_INFO();
+            var data = new STIG_INFO();
 
-            // test things out
-            Assert.True(data != null);
-            Assert.True(data.SI_DATA != null);
-            Assert.True(data.SI_DATA.Count == 0);
+            Assert.NotNull(data);
+            Assert.NotNull(data.SI_DATA);
+            Assert.Empty(data.SI_DATA);
+        }
+
+        [Fact]
+        public void SI_DATA_AcceptsEntries()
+        {
+            var data = new STIG_INFO();
+            data.SI_DATA.Add(new SI_DATA { SID_NAME = "title", SID_DATA = "Windows STIG" });
+
+            Assert.Single(data.SI_DATA);
+            Assert.Equal("title", data.SI_DATA[0].SID_NAME);
+            Assert.NotEqual("releaseinfo", data.SI_DATA[0].SID_NAME);
         }
     }
 }

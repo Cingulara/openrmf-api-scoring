@@ -1,27 +1,30 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class iSTIGTests
     {
         [Fact]
-        public void Test_NewiSTIGIsValid()
+        public void Constructor_InitializesNestedObjects()
         {
-            iSTIG iStig = new iSTIG();
-            Assert.True(iStig != null);
+            var iStig = new iSTIG();
+
+            Assert.NotNull(iStig);
+            Assert.NotNull(iStig.STIG_INFO);
+            Assert.NotNull(iStig.VULN);
+            Assert.Empty(iStig.VULN);
         }
-    
+
         [Fact]
-        public void Test_iSTIGWithDataIsValid()
+        public void VULN_AcceptsEntries()
         {
-            iSTIG iStig = new iSTIG();
-            // test things out
-            Assert.True(iStig != null);
-            Assert.True(iStig.STIG_INFO != null);
-            Assert.True(iStig.VULN != null);
-            Assert.True(iStig.VULN.Count == 0);
+            var iStig = new iSTIG();
+            iStig.VULN.Add(new VULN { STATUS = "open" });
+
+            Assert.Single(iStig.VULN);
+            Assert.Equal("open", iStig.VULN[0].STATUS);
+            Assert.NotEqual("not_reviewed", iStig.VULN[0].STATUS);
         }
     }
 }

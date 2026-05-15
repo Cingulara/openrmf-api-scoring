@@ -1,26 +1,31 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class CHECKLISTTests
     {
         [Fact]
-        public void Test_NewCHECKLISTIsValid()
+        public void Constructor_InitializesNestedObjects()
         {
-            CHECKLIST chk = new CHECKLIST();
-            Assert.True(chk != null);
+            var checklist = new CHECKLIST();
+
+            Assert.NotNull(checklist);
+            Assert.NotNull(checklist.ASSET);
+            Assert.NotNull(checklist.STIGS);
         }
-    
+
         [Fact]
-        public void Test_CHECKLISTWithDataIsValid()
+        public void Properties_CanBeReassigned()
         {
-            CHECKLIST chk = new CHECKLIST();
-            // test things out
-            Assert.True(chk != null);
-            Assert.True(chk.ASSET != null);
-            Assert.True(chk.STIGS != null);
+            var checklist = new CHECKLIST
+            {
+                ASSET = new ASSET { HOST_NAME = "host-one" },
+                STIGS = new STIGS()
+            };
+
+            Assert.Equal("host-one", checklist.ASSET.HOST_NAME);
+            Assert.NotEqual("host-two", checklist.ASSET.HOST_NAME);
         }
     }
 }
