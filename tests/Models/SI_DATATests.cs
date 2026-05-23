@@ -1,29 +1,32 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class SI_DATATests
     {
         [Fact]
-        public void Test_NewSI_DATAIsValid()
+        public void Constructor_CreatesInstance()
         {
-            SI_DATA data = new SI_DATA();
-            Assert.True(data != null);
-        }
-    
-        [Fact]
-        public void Test_SI_DATAWithDataIsValid()
-        {
-            SI_DATA data = new SI_DATA();
-            data.SID_DATA = "mydata";
-            data.SID_NAME = "myName";
+            var data = new SI_DATA();
 
-            // test things out
-            Assert.True(data != null);
-            Assert.True(!string.IsNullOrEmpty(data.SID_DATA));
-            Assert.True(!string.IsNullOrEmpty(data.SID_NAME));
+            Assert.NotNull(data);
+            Assert.Null(data.SID_NAME);
+            Assert.Null(data.SID_DATA);
+        }
+
+        [Fact]
+        public void Properties_RoundTripValues()
+        {
+            var data = new SI_DATA
+            {
+                SID_DATA = "value",
+                SID_NAME = "name"
+            };
+
+            Assert.Equal("value", data.SID_DATA);
+            Assert.Equal("name", data.SID_NAME);
+            Assert.NotEqual("other", data.SID_DATA);
         }
     }
 }

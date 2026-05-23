@@ -1,29 +1,32 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class STIG_DATATests
     {
         [Fact]
-        public void Test_NewSTIG_DATAIsValid()
+        public void Constructor_CreatesInstance()
         {
-            STIG_DATA data = new STIG_DATA();
-            Assert.True(data != null);
-        }
-    
-        [Fact]
-        public void Test_STIG_DATAWithDataIsValid()
-        {
-            STIG_DATA data = new STIG_DATA();
-            data.VULN_ATTRIBUTE = "my attribute";
-            data.ATTRIBUTE_DATA = "my data";
+            var data = new STIG_DATA();
 
-            // test things out
-            Assert.True(data != null);
-            Assert.True(!string.IsNullOrEmpty(data.VULN_ATTRIBUTE));
-            Assert.True(!string.IsNullOrEmpty(data.ATTRIBUTE_DATA));
+            Assert.NotNull(data);
+            Assert.Null(data.VULN_ATTRIBUTE);
+            Assert.Null(data.ATTRIBUTE_DATA);
+        }
+
+        [Fact]
+        public void Properties_RoundTripValues()
+        {
+            var data = new STIG_DATA
+            {
+                VULN_ATTRIBUTE = "Severity",
+                ATTRIBUTE_DATA = "high"
+            };
+
+            Assert.Equal("Severity", data.VULN_ATTRIBUTE);
+            Assert.Equal("high", data.ATTRIBUTE_DATA);
+            Assert.NotEqual("low", data.ATTRIBUTE_DATA);
         }
     }
 }

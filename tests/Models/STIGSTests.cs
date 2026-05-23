@@ -1,26 +1,27 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class STIGSTests
     {
         [Fact]
-        public void Test_NewSTIGSIsValid()
+        public void Constructor_InitializesiSTIG()
         {
-            STIGS data = new STIGS();
-            Assert.True(data != null);
-        }
-    
-        [Fact]
-        public void Test_STIGSWithDataIsValid()
-        {
-            STIGS data = new STIGS();
+            var data = new STIGS();
 
-            // test things out
-            Assert.True(data != null);
-            Assert.True(data.iSTIG != null);
+            Assert.NotNull(data);
+            Assert.NotNull(data.iSTIG);
+        }
+
+        [Fact]
+        public void iSTIG_CanBeAssigned()
+        {
+            var custom = new iSTIG();
+            var data = new STIGS { iSTIG = custom };
+
+            Assert.Same(custom, data.iSTIG);
+            Assert.NotNull(data.iSTIG.STIG_INFO);
         }
     }
 }

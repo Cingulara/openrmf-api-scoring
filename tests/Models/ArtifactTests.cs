@@ -1,43 +1,51 @@
-using Xunit;
-using openrmf_scoring_api.Models;
 using System;
+using openrmf_scoring_api.Models;
+using Xunit;
 
 namespace tests.Models
 {
     public class ArtifactTests
     {
         [Fact]
-        public void Test_NewArtifactIsValid()
+        public void Constructor_InitializesRequiredDefaults()
         {
-            Artifact art = new Artifact();
-            Assert.True(art != null);
-        }
-    
-        [Fact]
-        public void Test_ArtifactWithDataIsValid()
-        {
-            Artifact art = new Artifact();
-            art.created = DateTime.Now;
-            art.systemGroupId = "jhgfy5e456347545rdhjg";
-            art.hostName = "myHost";
-            art.stigType = "Google Chrome";
-            art.stigRelease = "R10";
-            art.version = "2";
-            art.updatedOn = DateTime.Now;
+            var artifact = new Artifact();
 
-            // test things out
-            Assert.True(art != null);
-            Assert.True (!string.IsNullOrEmpty(art.created.ToShortDateString()));
-            Assert.True (!string.IsNullOrEmpty(art.systemGroupId));
-            Assert.True (!string.IsNullOrEmpty(art.hostName));
-            Assert.True (!string.IsNullOrEmpty(art.stigType));
-            Assert.True (!string.IsNullOrEmpty(art.stigRelease));
-            Assert.True (!string.IsNullOrEmpty(art.version));
-            Assert.True (!string.IsNullOrEmpty(art.title));  // readonly from other fields
-            Assert.True (art.updatedOn.HasValue);
-            Assert.True (!string.IsNullOrEmpty(art.updatedOn.Value.ToShortDateString()));
-            Assert.True (art.CHECKLIST != null);
-            Assert.True (art.id != Guid.Empty);
+            Assert.NotNull(artifact);
+            Assert.NotEqual(Guid.Empty, artifact.id);
+            Assert.NotNull(artifact.CHECKLIST);
+        }
+
+        [Fact]
+        public void Title_ComposesFromTrimmedValues()
+        {
+            var artifact = new Artifact
+            {
+                created = DateTime.UtcNow,
+                hostName = " hostA ",
+                stigType = " Win11 ",
+                stigRelease = " R1 ",
+                version = "2",
+                updatedOn = DateTime.UtcNow
+            };
+
+            Assert.Equal("hostA-Win11-V2-R1", artifact.title);
+            Assert.NotEqual("hostA-Win10-V2-R1", artifact.title);
+            Assert.True(artifact.updatedOn.HasValue);
+        }
+
+        [Fact]
+        public void Title_Throws_WhenCriticalPartsMissing()
+        {
+            var artifact = new Artifact
+            {
+                hostName = null,
+                stigType = "type",
+                stigRelease = "R1",
+                version = "1"
+            };
+
+            Assert.Throws<NullReferenceException>(() => _ = artifact.title);
         }
     }
 }

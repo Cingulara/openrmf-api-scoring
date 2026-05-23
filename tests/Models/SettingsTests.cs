@@ -1,29 +1,32 @@
-using Xunit;
 using openrmf_scoring_api.Models;
-using System;
+using Xunit;
 
 namespace tests.Models
 {
     public class SettingsTests
     {
         [Fact]
-        public void Test_NewSettingsIsValid()
+        public void Constructor_CreatesInstance()
         {
-            Settings art = new Settings();
-            Assert.True(art != null);
-        }
-    
-        [Fact]
-        public void Test_SettingsWithDataIsValid()
-        {
-            Settings set = new Settings();
-            set.ConnectionString = "myConnection";
-            set.Database = "user=x; database=x; password=x;";
+            var settings = new Settings();
 
-            // test things out
-            Assert.True(set != null);
-            Assert.True (!string.IsNullOrEmpty(set.ConnectionString));
-            Assert.True (!string.IsNullOrEmpty(set.Database));
+            Assert.NotNull(settings);
+            Assert.Null(settings.ConnectionString);
+            Assert.Null(settings.Database);
+        }
+
+        [Fact]
+        public void Fields_RoundTripValues()
+        {
+            var settings = new Settings
+            {
+                ConnectionString = "mongodb://localhost",
+                Database = "OpenRMF"
+            };
+
+            Assert.Equal("mongodb://localhost", settings.ConnectionString);
+            Assert.Equal("OpenRMF", settings.Database);
+            Assert.NotEqual("postgres://localhost", settings.ConnectionString);
         }
     }
 }
